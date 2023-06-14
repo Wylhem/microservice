@@ -1,5 +1,15 @@
-export class UserContoller {
-  private usersHandler;
+import { response } from "express";
+import UsersHandler from "../../application/users/UsersHandler.application";
 
-  constructor() {}
+export default class UserContoller {
+  private usersHandler: UsersHandler;
+
+  constructor(userHandler: UsersHandler) {
+    this.usersHandler = userHandler;
+  }
+
+  public async getUsers(req: Request, res: Response) {
+    try {
+    } catch (e) {}
+  }
 }
