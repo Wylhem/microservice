@@ -1,0 +1,130 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Users {
+  usr_id        Int       @id @default(autoincrement())
+  usr_email     String    @unique
+  usr_password  String
+  usr_updatedAt DateTime? @updatedAt
+  usr_createdAt DateTime? @default(now())
+  profile       Profile?  @relation(fields: [usr_profile], references: [prf_id])
+  usr_profile   Int?      @unique
+}
+
+model Profile {
+  prf_id        Int      @id @default(autoincrement())
+  prf_firstname String?
+  prf_lastname  String?
+  prf_points    Int?     @default(1)
+  prf_updatedat DateTime @updatedAt
+  prf_createdAt DateTime @default(now())
+
+  Users           Users?
+  Contracts       Contract[]
+  Vehicule        Vehicule[]
+  SinisterHistory SinisterHistory[]
+}
+
+model Contract {
+  ctr_id Int @id @default(autoincrement())
+
+  status      ContractStatus @relation(fields: [ctr_status], references: [cts_id])
+  profile     Profile        @relation(fields: [ctr_profile], references: [prf_id])
+  ctr_profile Int
+
+  sinisterHistory     SinisterHistory @relation(fields: [prf_sinisterhistory], references: [sih_id])
+  ctr_updatedAt       DateTime        @updatedAt
+  prf_createdAt       DateTime        @default(now())
+  ctr_status          Int
+  prf_sinisterhistory Int
+}
+
+model SinisterHistory {
+  sih_id           Int          @id @default(autoincrement())
+  subscription     Subscription @relation(fields: [sih_subscription], references: [sub_id])
+  sih_subscription Int
+  profile          Profile      @relation(fields: [sub_profile], references: [prf_id])
+  sub_profile      Int
+  sinister         Sinister     @relation(fields: [sih_sinister], references: [sin_id])
+  sih_sinister     Int
+  sih_date         DateTime
+  sih_createdAt    DateTime     @default(now())
+  sih_updatedAt    DateTime     @updatedAt
+  Contract         Contract[]
+}
+
+model ContractStatus {
+  cts_id        Int        @id @default(autoincrement())
+  cts_label     String
+  cts_updatedAt DateTime   @updatedAt
+  cts_createdAt DateTime   @default(now())
+  Contract      Contract[]
+}
+
+model Vehicule {
+  vhc_id             Int          @id @default(autoincrement())
+  vhc_brand          String
+  vhc_registration   String
+  vhc_age            Int
+  profile            Profile      @relation(fields: [profilePrf_id], references: [prf_id])
+  vehiculeType       VehiculeType @relation(fields: [vehiculeTypeVht_id], references: [vht_id])
+  vhc_updatedAt      DateTime     @updatedAt
+  vhc_createdAt      DateTime     @default(now())
+  profilePrf_id      Int
+  vehiculeTypeVht_id Int
+}
+
+model VehiculeType {
+  vht_id        Int        @id @default(autoincrement())
+  vht_label     String
+  vht_category  String
+  vht_updatedAt DateTime   @updatedAt
+  vht_createdAt DateTime   @default(now())
+  Vehicule      Vehicule[]
+}
+
+model Subscription {
+  sub_id    Int    @id @default(autoincrement())
+  sub_label String
+
+  sub_createdAt         DateTime                @default(now())
+  sub_updatedAt         DateTime                @updatedAt
+  SubscriptionGuarentee SubscriptionGuarentee[]
+  SinisterHistory       SinisterHistory[]
+}
+
+model SubscriptionGuarentee {
+  sug_id             Int           @id @default(autoincrement())
+  guarentee          Guarantee?    @relation(fields: [sug_guarantee], references: [gre_id])
+  sug_guarantee      Int?
+  subscription       Subscription? @relation(fields: [subscriptionSub_id], references: [sub_id])
+  sug_createdAt      DateTime      @default(now())
+  sug_updatedAt      DateTime      @updatedAt
+  subscriptionSub_id Int?
+}
+
+model Guarantee {
+  gre_id        Int      @id @default(autoincrement())
+  gre_label     String
+  gre_createdAt DateTime @default(now())
+  gre_updatedAt DateTime @updatedAt
+
+  SubscriptionGuarentee SubscriptionGuarentee[]
+}
+
+model Sinister {
+  sin_id          Int               @id @default(autoincrement())
+  sin_label       String
+  sin_createdAt   DateTime          @default(now())
+  sin_updatedAt   DateTime          @updatedAt
+  SinisterHistory SinisterHistory[]
+}
