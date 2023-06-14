@@ -1,5 +1,5 @@
 import express from "express";
-import { initApp } from "./application";
+import { initApp } from "./controller";
 
 const app = initApp();
 const port = 8080; // default port to listen
