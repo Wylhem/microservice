@@ -5,9 +5,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8551170c-b62d-459e-837b-f840d941e7ad" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../user-api/src/API/User/user.controller.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../user-api/src/Domain/User/users.repository.interface.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../user-api/src/Infrastructure/user/user.repository.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../user-api/src/Domain/User/models/user.model.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../user-api/src/Domain/User/user.usecase.domain.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../user-api/src/Infrastructure/user/entity/user.entity.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user-api/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../user-api/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user-api/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../user-api/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user-api/src/API/User/user.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../user-api/src/API/User/user.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user-api/src/Domain/User/usecase.domain.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user-api/src/Domain/User/user.domain.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../user-api/src/Domain/User/user.domain.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user-api/src/Domain/User/user.type.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user-api/src/Domain/User/users.repository.interface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../user-api/src/Domain/User/users.repository.interface.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user-api/src/Domain/domain.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../user-api/src/Domain/domain.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user-api/src/Infrastructure/infrastructure.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../user-api/src/Infrastructure/infrastructure.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user-api/src/Infrastructure/user/user.entity.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user-api/src/Infrastructure/user/user.repository.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../user-api/src/Infrastructure/user/user.repository.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user-api/src/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../user-api/src/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user-api/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../user-api/src/main.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user-api/src/tests/tests.controller.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user-api/src/tests/tests.controller.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user-api/src/tests/tests.module.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user-api/src/tests/tests.service.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user-api/src/tests/tests.service.ts" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,21 +40,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;nest&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/wylhemdorville/Desktop/apps/microserv/users&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Applications/WebStorm.app/Contents/plugins/javascript-impl/jsLanguageServicesImpl/external&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "dev",
+    "last_opened_file_path": "/Users/wylhemdorville/Desktop/apps/microserv/users",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "ts.external.directory.path": "/Applications/WebStorm.app/Contents/plugins/javascript-impl/jsLanguageServicesImpl/external",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="npm.start">
     <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
@@ -88,6 +106,7 @@
       <workItem from="1686755512727" duration="1722000" />
       <workItem from="1686903224852" duration="73000" />
       <workItem from="1686992809605" duration="639000" />
+      <workItem from="1687014735668" duration="1000" />
     </task>
     <servers />
   </component>

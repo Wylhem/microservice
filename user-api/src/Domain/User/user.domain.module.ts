@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
-import { UseCaseDomain } from './usecase.domain';
+import { UserUsecaseDomain } from './user.usecase.domain';
 import { UserRepositoryModule } from '../../Infrastructure/user/user.repository.module';
 
 @Module({
   imports: [UserRepositoryModule],
-  providers: [UseCaseDomain],
-  exports: [UseCaseDomain],
+  providers: [UserUsecaseDomain],
+  exports: [UserUsecaseDomain],
 })
 export class UserModule {}
