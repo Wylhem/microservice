@@ -8,4 +8,5 @@ export class UsersDto {
     public updatedAt: Date,
     public createdAt: Date
   ) {}
+
 }

@@ -4,9 +4,9 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc -w",
+    "build": "tsc",
     "prestart": "npm run build",
-    "start": "node .",
+    "start": "tsx watch .",
     "dev": "node --watch .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

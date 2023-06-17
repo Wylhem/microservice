@@ -9,18 +9,10 @@ export default class UsersController {
     this.usersHandler = userHandler;
   }
   public async getUsers(req: Request, res: Response, next: NextFunction){
-    try{
       console.log("hello")
       const users = await this.usersHandler.getUsers();
-      res.send( users.map((el) => {
-        return new UsersDto(
-          el.usr_id,
-          el.usr_email,
-          el.usr_password,
-          el.usr_updatedAt,
-          el.usr_createdAt
-        );
-      }));
-    } catch (e) {}
+      const usersDto = users.map((el)=> new UsersDto(el.usr_id, el.usr_email, el.usr_password, el.usr_updatedAt, el.usr_createdAt));
+      res.json(usersDto);
+      next();
   }
 }
