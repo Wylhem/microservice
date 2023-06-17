@@ -1,6 +1,5 @@
 {
     "compilerOptions": {
-        "compileOnSave": true,
         "module": "commonjs",
         "esModuleInterop": true,
         "target": "es6",
