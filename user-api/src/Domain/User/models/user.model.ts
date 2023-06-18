@@ -1,5 +1,6 @@
-import { Exclude, Expose } from 'class-transformer';
+import { Exclude, Expose, Type } from 'class-transformer';
 import { IsDate, IsEmail, IsNumber, IsString } from 'class-validator';
+import { ProfileModel } from '../../Profile/models/profile.model';
 
 @Exclude()
 export class UsersModel {
@@ -21,6 +22,10 @@ export class UsersModel {
   @Expose()
   @IsDate()
   createdAt: Date;
+
+  @Expose()
+  @Type(() => ProfileModel)
+  profile?: ProfileModel;
 
   constructor(partial: Partial<UsersModel>) {
     Object.assign(this, partial);
