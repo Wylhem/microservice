@@ -75,12 +75,12 @@ model Vehicule {
   vhc_brand          String
   vhc_registration   String
   vhc_age            Int
-  profile            Profile      @relation(fields: [profilePrf_id], references: [prf_id])
-  vehiculeType       VehiculeType @relation(fields: [vehiculeTypeVht_id], references: [vht_id])
+  profile            Profile      @relation(fields: [vhc_profile], references: [prf_id])
+  vehiculeType       VehiculeType @relation(fields: [vhc_vehiculetype], references: [vht_id])
   vhc_updatedAt      DateTime     @updatedAt
   vhc_createdAt      DateTime     @default(now())
-  profilePrf_id      Int
-  vehiculeTypeVht_id Int
+  vhc_profile      Int
+  vhc_vehiculetype Int
 }
 
 model VehiculeType {

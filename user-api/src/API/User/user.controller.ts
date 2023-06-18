@@ -13,18 +13,23 @@ import { UserUsecaseDomain } from '../../Domain/User/user.usecase.domain';
 import { UsersModel } from '../../Domain/User/models/user.model';
 import * as http from 'http';
 import { classToPlain, instanceToPlain, serialize } from 'class-transformer';
-import { Users } from '@prisma/client';
+import { Profile, Users } from '@prisma/client';
 import { CreateUserDto } from './DTO/create-user.dto';
 import { UserEntity } from '../../Infrastructure/user/entity/user.entity';
 import { UpdateUserDto } from './DTO/update-user.dto';
 import { CreateProfileDto } from './DTO/create-profile.dto';
 import { ProfileUseCaseDomain } from '../../Domain/Profile/profile.usecase.domain';
+import { ProfileModel } from '../../Domain/Profile/models/profile.model';
+import { CreateVehiculeDto } from './DTO/create-vehicule.dto';
+import { VehiculeModel } from '../../Domain/Vehicule/models/vehicule.model';
+import { VehiculeUseCaseDomain } from '../../Domain/Vehicule/vehicule.use-case.domain';
 
 @Controller('users')
 export class UserController {
   constructor(
     private readonly userUseCase: UserUsecaseDomain,
     private readonly profileUseCase: ProfileUseCaseDomain,
+    private readonly vehiculeUseCase: VehiculeUseCaseDomain,
   ) {}
 
   @Get()
@@ -62,11 +67,40 @@ export class UserController {
     return new UsersModel(user);
   }
 
-  @Post('/profile')
+  @Post(':id/profile')
   public async createProfile(
+    @Param('id') id: number,
     @Body() createProfile: CreateProfileDto,
-  ): Promise<UsersModel> {
-    return;
+  ): Promise<ProfileModel> {
+    if (!createProfile) {
+      throw new BadRequestException();
+    }
+    const profileToDomain = new ProfileModel(createProfile);
+    const profile = await this.profileUseCase.createProfile(
+      id,
+      profileToDomain,
+    );
+    if (!profile) {
+      throw new NotFoundException();
+    }
+    return new ProfileModel(profile);
+  }
+
+  @Post('profile/:id/vehicule')
+  public async createVehicule(
+    @Param('id') id: number,
+    @Body() createVehicule: CreateVehiculeDto,
+  ): Promise<VehiculeModel> {
+    if (!createVehicule) {
+      throw new BadRequestException();
+    }
+    const vehiculeToDomain = new VehiculeModel(createVehicule);
+    const vehicule = await this.vehiculeUseCase.create(id, vehiculeToDomain);
+
+    if (!vehicule) {
+      throw new NotFoundException();
+    }
+    return new VehiculeModel(vehicule);
   }
 
   @Put()

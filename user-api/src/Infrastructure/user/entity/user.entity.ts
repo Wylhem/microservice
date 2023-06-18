@@ -1,5 +1,6 @@
 import { Users } from '@prisma/client';
 import { UsersModel } from '../../../Domain/User/models/user.model';
+import { ProfileEntity } from '../../profile/entity/profile.entity';
 
 export class UserEntity implements Users {
   usr_id: number;
@@ -9,6 +10,8 @@ export class UserEntity implements Users {
   usr_createdAt: Date;
   usr_profile: number;
 
+  profile?: ProfileEntity;
+
   public static MapperToDomain(userEntity: UserEntity): UsersModel {
     return {
       id: userEntity.usr_id,
@@ -16,6 +19,9 @@ export class UserEntity implements Users {
       password: userEntity.usr_password,
       updatedAt: userEntity.usr_updatedAt,
       createdAt: userEntity.usr_createdAt,
+      profile: userEntity.profile
+        ? ProfileEntity.MapperToDomain(userEntity.profile)
+        : null,
     };
   }
 
@@ -26,7 +32,10 @@ export class UserEntity implements Users {
       usr_password: user?.password ?? undefined,
       usr_updatedAt: user?.updatedAt ?? undefined,
       usr_createdAt: user?.createdAt ?? undefined,
-      usr_profile: undefined,
+      usr_profile: user?.profile?.id ?? undefined,
+      profile: user?.profile
+        ? ProfileEntity.MapperToInfrastructure(user?.profile)
+        : null,
     };
   }
 }

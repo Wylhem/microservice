@@ -10,7 +10,11 @@ export class UserRepository implements UsersRepositoryInterface {
   constructor(private readonly prisma: PrismaService) {}
 
   public async getAll(): Promise<Array<UsersModel>> {
-    const users: Array<UserEntity> = await this.prisma.users.findMany();
+    const users: Array<UserEntity> = await this.prisma.users.findMany({
+      include: {
+        profile: true,
+      },
+    });
     return users.map((user) => UserEntity.MapperToDomain(user));
   }
 
@@ -18,6 +22,9 @@ export class UserRepository implements UsersRepositoryInterface {
     const users: UserEntity = await this.prisma.users.findFirstOrThrow({
       where: {
         usr_id: userId,
+      },
+      include: {
+        profile: true,
       },
     });
     return UserEntity.MapperToDomain(users);
@@ -44,7 +51,7 @@ export class UserRepository implements UsersRepositoryInterface {
         usr_id: userId,
       },
       data: {
-        usr_email: user.email,
+        usr_email: userEntity.usr_email,
       },
     });
     return UserEntity.MapperToDomain(prismaUser);
