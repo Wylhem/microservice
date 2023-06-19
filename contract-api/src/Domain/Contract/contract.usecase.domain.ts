@@ -13,8 +13,8 @@ export class ContractUsecaseDomain {
     return await this.repository.getAll();
   }
 
-  public async getOne(userId: number): Promise<ContractsModel> {
-    return await this.repository.getOne(userId);
+  public async getOne(contractId: number): Promise<ContractsModel> {
+    return await this.repository.getOne(contractId);
   }
 
   public async create(
@@ -26,6 +26,6 @@ export class ContractUsecaseDomain {
   public async updateContract(
     contract: Partial<ContractsModel>,
   ): Promise<ContractsModel> {
-    return await this.repository.update(+contract.id, contract);
+    return await this.repository.updateContract(+contract.id, contract);
   }
 }

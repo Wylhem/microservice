@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
-import { UserController } from './User/user.controller';
+import { ContractController } from './Contract/contract.controller';
 import { DomainModule } from '../Domain/domain.module';
 
 @Module({
-  controllers: [UserController],
+  controllers: [ContractController],
   imports: [DomainModule],
 })
 export class ApiModule {}

@@ -21,21 +21,21 @@ export class ContractController {
   @Get()
   @HttpCode(200)
   public async getAll(): Promise<Array<ContractsModel>> {
-    const users = await this.contractUseCase.getAll();
-    if (!users) {
+    const contracts = await this.contractUseCase.getAll();
+    if (!contracts) {
       throw new NotFoundException();
     }
-    return users.map((el) => new ContractsModel(el));
+    return contracts.map((el) => new ContractsModel(el));
   }
 
   @Get(':id')
   @HttpCode(200)
   public async getOne(@Param('id') id: number): Promise<ContractsModel> {
-    const user = await this.contractUseCase.getOne(+id);
-    if (!user) {
+    const contract = await this.contractUseCase.getOne(+id);
+    if (!contract) {
       throw new NotFoundException();
     }
-    return new ContractsModel(user);
+    return new ContractsModel(contract);
   }
 
   @Post()
@@ -56,17 +56,19 @@ export class ContractController {
   }
 
   @Put()
-  public async updateStatus(
+  public async updateContract(
     @Body() updateContract: UpdateContractDto,
   ): Promise<ContractsModel> {
     if (!updateContract) {
       throw new BadRequestException();
     }
-    const userToDomain = new ContractsModel(updateContract);
-    const user = await this.contractUseCase.updateContract(userToDomain);
-    if (!user) {
+    const contractToDomain = new ContractsModel(updateContract);
+    const contract = await this.contractUseCase.updateContract(
+      contractToDomain,
+    );
+    if (!contract) {
       throw new NotFoundException();
     }
-    return new ContractsModel(user);
+    return new ContractsModel(contract);
   }
 }

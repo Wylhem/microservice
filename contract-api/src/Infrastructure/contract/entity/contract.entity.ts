@@ -3,10 +3,10 @@ import { ContractsModel } from '../../../Domain/Contract/models/contract.model';
 
 export class ContractEntity implements Contract {
   ctr_id: number;
-  ctr_profile: number;
+  ctr_status: number;
   ctr_updatedAt: Date;
   prf_createdAt: Date;
-  ctr_status: number;
+  ctr_profile: number;
   prf_sinisterhistory: number;
 
   public static MapperToDomain(contractEntity: ContractEntity): ContractsModel {
@@ -24,9 +24,9 @@ export class ContractEntity implements Contract {
     return {
       ctr_id: contract?.id ?? undefined,
       ctr_status: contract?.status ?? undefined,
-      ctr_profile: undefined,
       ctr_updatedAt: contract?.updatedAt ?? undefined,
       prf_createdAt: contract?.createdAt ?? undefined,
+      ctr_profile: undefined,
       prf_sinisterhistory: undefined,
     };
   }
