@@ -3,7 +3,6 @@ import { ContractsModel } from '../../Domain/Contract/models/contract.model';
 import { PrismaService } from '../../database/database.connection';
 import { ContractEntity } from './entity/contract.entity';
 import { Injectable } from '@nestjs/common';
-import e from 'express';
 
 @Injectable()
 export class ContractRepository implements ContractsRepositoryInterface {
@@ -33,7 +32,10 @@ export class ContractRepository implements ContractsRepositoryInterface {
     const prismaUser = await this.prisma.contract.create({
       data: {
         ctr_status: contractEntity.ctr_status,
-        ctr_profile: contractEntity.ctr_profile,
+      },
+      include: {
+        profile: true,
+        sinisterHistory: true,
       },
     });
     return ContractEntity.MapperToDomain(prismaUser);
@@ -43,8 +45,6 @@ export class ContractRepository implements ContractsRepositoryInterface {
     contractId: number,
     contract: Partial<ContractsModel>,
   ): Promise<ContractsModel> {
-    const contractEntity: ContractEntity =
-      ContractEntity.MapperToInfratstructure(contract);
     const prismaUser = await this.prisma.contract.update({
       where: {
         ctr_id: contractId,
