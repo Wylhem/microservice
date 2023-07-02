@@ -5,4 +5,4 @@ import { Module } from '@nestjs/common';
   providers: [SinisterRepositoryProvider],
   exports: [SinisterRepositoryProvider],
 })
-export class UserRepositoryModule {}
+export class SinisterRepositoryModule {}

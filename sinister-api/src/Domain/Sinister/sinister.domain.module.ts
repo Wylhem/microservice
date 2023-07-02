@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { SinisterUsecaseDomain } from './sinister.usecase.domain';
-import { SinisterRepositoryModule } from '../../Infrastructure/sinister/sinister.repository.module';
+import { SinisterRepositoryModule } from '../../Infrastructure/sinister/sinister-history.repository.module';
 
 @Module({
   imports: [SinisterRepositoryModule],
